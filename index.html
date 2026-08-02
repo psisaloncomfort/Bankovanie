@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salón pre malých psov COMFORT</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        body {
+            font-family: "MS Reference Sans Serif", sans-serif;
+            color: #000000;
+            margin: 0;
+            padding: 0;
+            position: relative;
+            background-color: rgba(237, 237, 238, 0.5);
+        }
+        .slideshow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: -1;
+            overflow: hidden;
+        }
+        .slideshow img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 90%;
+            height: 100%;
+            object-fit: cover;
+            transform: translate(-50%, -50%);
+            opacity: 1;
+            animation: slideShow 30s infinite;
+        }
+        .slideshow img:nth-child(1) { animation-delay: 5s; }
+        .slideshow img:nth-child(2) { animation-delay: 10s; }
+        .slideshow img:nth-child(3) { animation-delay: 15s; }
+        .slideshow img:nth-child(4) { animation-delay: 20s; }
+        .slideshow img:nth-child(5) { animation-delay: 25s; }
+
+        @keyframes slideShow {
+            0% { opacity: 0; }
+            25% { opacity: 1; }
+            50% { opacity: 1; }
+            75% { opacity: 0; }
+            100% { opacity: 0; }
+        }
+
+        header {
+            background-color: rgba(255, 255, 255, 0.0);
+            color: white;
+            text-align: center;
+            padding: 20px 10px;
+            position: relative;
+            z-index: 1;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        @media (min-width: 769px) {
+            header {
+                flex-direction: row;
+                justify-content: space-between;
+                padding: 20px 80px;
+            }
+            .logo { position: static; }
+            .contact-info { position: static; text-align: right; }
+        }
+
+        .logo img {
+            width: 100px;
+            height: auto;
+            cursor: pointer;
+        }
+        .blinking-logo { animation: blink 3s infinite; }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .contact-info p {
+            margin: 3px 0;
+            font-size: 0.9em;
+            color: white;
+        }
+        h1 {
+            font-size: 24px;
+            margin: 10px 0;
+        }
+        
+        nav {
+            background-color: transparent !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 15px;
+            position: relative;
+            z-index: 1;
+        }
+        nav a {
+            color: white;
+            text-align: center;
+            padding: 10px 20px;
+            text-decoration: none;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 1), 0px 0px 8px rgba(0, 0, 0, 0.8);
+            transition: color 0.3s, transform 0.2s;
+            font-size: 1.05em;
+            font-weight: bold;
+        }
+        nav a:hover { 
+            color: #75fb81; 
+            transform: scale(1.05);
+        }
+
+        main {
+            padding: 15px;
+            position: relative;
+            z-index: 1;
+            margin-top: 65vh;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        footer {
+            background-color: rgba(51, 51, 51, 0.8);
+            color: white;
+            text-align: center;
+            padding: 20px 10px;
+            position: relative;
+            width: 100%;
+            box-sizing: border-box;
+            z-index: 1;
+            font-size: 0.9em;
+        }
+
+        .section {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .section h2 {
+            color: #333333;
+            margin-top: 5px;
+            margin-bottom: 15px;
+        }
+        
+        .photo-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+        .photo-container img {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            object-fit: contain;
+            border-radius: 5px;
+        }
+
+        .gallery-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+        .gallery-container img {
+            width: auto;
+            max-width: 100%;
+            height: 350px;
+            object-fit: contain;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        /* 100% RESPONSÍVNY BLOK PRE MAPU */
+        .map-wrapper {
+            width: 100%;
+            clear: both;
+            display: block;
+            position: relative;
+        }
+        #map {
+            height: 450px;
+            width: 100%;
+            border-radius: 5px;
+            position: relative;
+            z-index: 1;
+        }
+        .leaflet-control-attribution { display: none !important; }
+
+        .visit-counter {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 5px;
+            z-index: 10;
+            font-size: 0.8em;
+        }
+
+        /* MOBILNÁ VERZIA */
+        @media (max-width: 768px) {
+            main {
+                margin-top: 55vh;
+                padding: 10px;
+            }
+            h1 { font-size: 20px; }
+            
+            nav {
+                flex-direction: column;
+                align-items: center;
+                padding: 10px;
+            }
+            nav a {
+                padding: 12px 0;
+                width: 100%;
+                border-bottom: 1px solid rgba(255,255,255,0.2);
+            }
+            nav a:last-child { border-bottom: none; }
+            
+            .photo-container img { max-width: 100%; }
+            
+            .gallery-container img {
+                width: 100%;
+                height: auto;
+                max-width: 100%;
+            }
+            #map { height: 320px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="slideshow">
+    <img src="slide1.jpg" alt="Slide 1">
+    <img src="slide2.jpg" alt="Slide 2">
+    <img src="slide3.jpg" alt="Slide 3">
+    <img src="slide4.jpg" alt="Slide 4">
+</div>
+
+<header>
+    <div class="logo">
+        <a href="javascript:void(0)" onclick="showVideo()">
+            <img src="logo.png" alt="Logo salónu" class="blinking-logo">
+        </a>
+    </div>
+    <h1>Salón pre malých psov COMFORT</h1>
+    <div class="contact-info">
+        <p><strong>0919 275 250</strong></p>
+        <p>Pon.-Pia. 8:00-16:00</p>
+        <p>na objednávku</p>
+    </div>
+</header>
+
+<nav>
+    <a href="#about">O nás</a>
+    <a href="#shop">Ozónová terapia a SPA</a>
+    <a href="#Higijena">Hygiena</a>
+    <a href="#services">Služby a ceny</a>
+    <a href="#gallery">Galéria</a>
+    <a href="#Contact">Kontakty</a>
+</nav>
+
+<main>
+    <section id="about" class="section">
+        <h2>O nás</h2>
+        <div class="photo-container"> 
+            <img src="info.jpg" alt="Info">
+        </div>
+    </section>
+
+    <section id="shop" class="section">
+        <h2>Ozónová terapia a SPA</h2>
+        <div class="photo-container">
+            <img src="servis1.jpg" alt="servis 1">
+        </div>
+    </section>
+
+    <section id="Higijena" class="section">
+        <h2>Hygiena</h2>
+        <div class="photo-container">
+            <img src="hyg1.jpg" alt="hyg 1">
+            <img src="hyg2.jpg" alt="hyg 2">
+        </div>
+    </section>
+
+    <section id="services" class="section">
+        <h2>Služby a ceny</h2>
+        <div class="photo-container">
+            <img src="ceny.jpg" alt="ceny">
+            <img src="ceny1.jpg" alt="ceny 1">
+        </div>
+    </section>
+
+    <section id="gallery" class="section">
+        <h2>Galéria</h2>
+        <div class="gallery-container">
+            <img src="dog1.jpg" alt="dog 1">
+            <img src="dog2.jpg" alt="dog 2">
+            <img src="dog3.jpg" alt="dog 3">
+            <img src="dog4.jpg" alt="dog 4">
+            <img src="dog5.jpg" alt="dog 5">
+            <img src="dog6.jpg" alt="dog 6">
+            <img src="dog7.jpg" alt="dog 7">
+            <img src="dog8.jpg" alt="dog 8">
+            <img src="dog9.jpg" alt="dog 9">
+            <img src="dog10.jpg" alt="dog 10">
+            <img src="dog11.jpg" alt="dog 11">
+            <img src="dog12.jpg" alt="dog 12">
+            <img src="dog13.jpg" alt="dog 13">
+            <img src="dog14.jpg" alt="dog 14">
+            <img src="dog15.jpg" alt="dog 15">
+            <img src="dog16.jpg" alt="dog 16">
+            <img src="dog17.jpg" alt="dog 17">
+            <img src="dog18.jpg" alt="dog 18">
+            <img src="dog19.jpg" alt="dog 19">
+            <img src="dog20.jpg" alt="dog 20">
+            <img src="dog21.jpg" alt="dog 21">
+            <img src="dog22.jpg" alt="dog 22">
+            <img src="dog23.jpg" alt="dog 23">
+            <img src="dog24.jpg" alt="dog 24">
+            <img src="dog25.jpg" alt="dog 25">
+            <img src="dog26.jpg" alt="dog 26">
+            <img src="dog27.jpg" alt="dog 27">
+            <img src="dog28.jpg" alt="dog 28">
+            <img src="dog29.jpg" alt="dog 29">
+            <img src="dog30.jpg" alt="dog 30">
+            <img src="dog31.jpg" alt="dog 31">
+
+        </div>
+    </section>
+
+    <section id="Contact" class="section">
+        <h2>Kontakty</h2>
+        <p><strong>Adresa:</strong> Nešporova, 2550/35, Poprad-Veľká</p>
+        <p><strong>Telefón:</strong> 0919 275 250</p>
+        <p><strong>Email:</strong> vladirov@gmail.com</p>
+    </section>
+       
+    <section id="map-section" class="section">
+        <h2>Kde nás nájdete</h2>
+        <div class="map-wrapper">
+            <div id="map"></div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    &copy; 2026 Salón pre malých psov "COMFORT"<br>
+    Nešporova 2550/35, Poprad-Veľká
+</footer>
+
+<div class="visit-counter">
+    Návštevy: <span id="visit-count"></span>
+</div>
+
+<div id="video-modal" style="display:none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 100;">
+    <video id="promo-video" width="100%" height="100%" controls autoplay>
+        <source src="video.mp4" type="video/mp4">
+        Váš prehliadač nepodporuje video tag.
+    </video>
+    <button onclick="closeVideo()" style="position: absolute; top: 10px; right: 10px; background: white; border: none; padding: 10px; cursor: pointer; border-radius: 3px;">Zatvoriť</button>
+</div>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+    var map;
+
+    function initMap() {
+        // Inicializácia mapy priamo na ID elementu
+        map = L.map('map', {
+            center: [49.0675351, 20.2936956],
+            zoom: 15,
+            tap: false
+        });
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+        var marker = L.marker([49.0675351, 20.2936956]).addTo(map)
+            .bindPopup('<b>Salón pre malých psov "COMFORT"</b><br>Nešporova 2550/35, Poprad');
+
+        marker.openPopup();
+
+        // Absolútna poistka pre mobily: tri postupné vynútené prekreslenia veľkosti
+        setTimeout(function() { map.invalidateSize(); }, 100);
+        setTimeout(function() { map.invalidateSize(); }, 500);
+        setTimeout(function() { map.invalidateSize(); }, 1200);
+    }
+
+    // Spustenie po kompletnej príprave okna prehliadača
+    window.addEventListener('load', initMap);
+    window.addEventListener('resize', function() { if(map) map.invalidateSize(); });
+
+    document.addEventListener('scroll', function() {
+        var slideshow = document.querySelector('.slideshow');
+        if (window.scrollY > 500) {
+            slideshow.style.display = 'none';
+        } else {
+            slideshow.style.display = 'block';
+        }
+        if(map) map.invalidateSize(); // Prekresľovanie mapy pri pohybe prsta na mobile
+    });
+
+    // Oprava pre prebudenie mapy pri kliknutí na menu kategórií
+    document.querySelectorAll('nav a').forEach(function(link) {
+        link.addEventListener('click', function() {
+            setTimeout(function() { if(map) map.invalidateSize(); }, 300);
+            setTimeout(function() { if(map) map.invalidateSize(); }, 800);
+        });
+    });
+
+    function showVideo() {
+        document.getElementById('video-modal').style.display = 'block';
+        document.getElementById('promo-video').play();
+    }
+
+    function closeVideo() {
+        var videoModal = document.getElementById('video-modal');
+        var promoVideo = document.getElementById('promo-video');
+        videoModal.style.display = 'none';
+        promoVideo.pause();
+        promoVideo.currentTime = 0;
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var visitCount = localStorage.getItem('visitCount') || 0;
+        visitCount++;
+        localStorage.setItem('visitCount', visitCount);
+        document.getElementById('visit-count').innerText = visitCount;
+    });
+</script>
+
+</body>
+</html>
