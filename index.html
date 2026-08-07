@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Energia Vákuovej Masáže </title>
+    <title>Energia Vákuovej Masáže</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <style>
         body {
@@ -42,7 +42,7 @@
             padding: 1em 0;
             position: relative;
             z-index: 1;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9); /* Обриси навколо заголовку */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
         }
         
         .logo {
@@ -56,17 +56,13 @@
             cursor: pointer;
         }
         .blinking-logo {
-    animation: blink 3s infinite; /* Блимає кожну секунду */
-}
+            animation: blink 3s infinite;
+        }
 
-@keyframes blink {
-    0%, 100% {
-        opacity: 1; /* Повністю видно */
-    }
-    50% {
-        opacity: 0; /* Невидимо */
-    }
-}
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
 
         .contact-info {
             position: absolute;
@@ -76,7 +72,7 @@
         .contact-info p {
             margin: 0;
             font-size: 0.8em;
-            color: white; /* Колір тексту телефону */
+            color: white;
         }
         nav {
             background-color: rgba(51, 51, 51, 0.0);
@@ -93,18 +89,18 @@
             padding: 14px 20px;
             text-decoration: none;
             margin: 0 10px;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 1.5); /* Обриси навколо тексту навігації */
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 1.5);
             transition: color 0.3s;
         }
         nav a:hover {
-            color: #75fb81; /* Кольор при наведенні */
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.); /* Обриси навколо тексту при наведенні */
+            color: #75fb81;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0);
         }
         main {
             padding: 10px;
             position: relative;
             z-index: 1;
-            margin-top: 70vh; /* Відступ для зміщення контенту нижче */
+            margin-top: 70vh;
         }
         footer {
             background-color: rgba(51, 51, 51, 0.0);
@@ -121,22 +117,13 @@
             padding: 20px;
             margin: 20px 0;
             border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0);
         }
         .section h2 {
             color: #333333;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.0); /* Обриси навколо заголовків секцій */
-        }
-        
-         
-        .reviews form {
-            display: flex;
-            flex-direction: column;
-        }
-        .reviews textarea {
-            margin-bottom: 10px;
-            padding: 10px;
-            resize: vertical;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.0);
+            margin-top: 5px;
+            margin-bottom: 0px;
         }
         .visit-counter {
             position: fixed;
@@ -149,24 +136,20 @@
             z-index: 10;
         }
         .photo-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
-
-.photo-container img {
-    width: 90%;
-    max-width:1200px; /* Фіксована ширина */
-    height: auto; /* Фіксована висота */
-    object-fit: cover;
-    margin: auto;
-}
-.photo-container img {
-    position: relative;
-    left: -60px; /* Зсуває зображення вліво */
-}
-
-
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .photo-container img {
+            width: 90%;
+            max-width: 1200px;
+            height: auto;
+            object-fit: cover;
+            margin: auto;
+            position: relative;
+            left: -60px;
+            margin-bottom: 10px;
+        }
         #map {
             height: 500px;
             width: 100%;
@@ -175,59 +158,55 @@
         .leaflet-control-attribution {
             display: none !important;
         }
-   .photo-container img {
-    margin-bottom: 10px; /* Зменшує відступ між фото і текстом */
-}
+        h1 {
+            font-size: 20px;
+        }
 
-.section h2 {
-    margin-top: 5px; /* Зменшує відступ зверху тексту */
-    margin-bottom: 0px; /* Зменшує відступ знизу тексту */
-}
-  h1 {
-    
-    font-size: 20px;
-
-}
-
-
-    
-
-/* === Responsive additions === */
-@media (max-width:768px){
-.logo,.contact-info{position:relative;left:0;right:0;top:0;text-align:center}
-.logo img{width:70px}
-nav{flex-direction:column;padding:10px}
-nav a{display:block;width:100%;padding:12px;margin:2px 0}
-main{margin-top:40vh;padding:15px}
-.slideshow{height:45vh}.slideshow img{width:100%;height:100%}
-.photo-container{display:block}
-.photo-container img{width:100%!important;max-width:100%!important;left:0!important}
-#map{height:300px}
-h1{font-size:24px}h2{font-size:20px}
-}
-
-</style>
+        /* Modal Okno pre Video */
+        #video-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .video-container {
+            position: relative;
+            width: 80%;
+            max-width: 900px;
+            background: #000;
+        }
+        .close-btn {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            background: #fff;
+            color: #000;
+            border: none;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-weight: bold;
+            border-radius: 3px;
+        }
+    </style>
 </head>
 <body>
 
-
-
-
 <div class="slideshow">
     <img src="slide1.jpg" alt="Slide 1">
-    
 </div>
 
 <header>
     <div class="logo">
-    
-    <a href="javascript:void(0)" onclick="showVideo()">
-        
-    <img src="logo.png" alt="Logo salónu" class="blinking-logo">
-   
-    </a>
-
-</div>
+        <a href="javascript:void(0)" onclick="showVideo()">
+            <img src="logo.png" alt="Logo salónu" class="blinking-logo">
+        </a>
+    </div>
     <h1>Energia Vákuovej Masáže</h1>
     <h1>V prostredí vášho domova</h1>
     <div class="contact-info">
@@ -248,80 +227,68 @@ h1{font-size:24px}h2{font-size:20px}
     <section id="about" class="section">
         <h2>O nás</h2>
         <div class="photo-container"> 
-        <img src="info.jpg" alt="Info">
-
-          
-            
+            <img src="info.jpg" alt="Info">
         </div>
     </section>
+
     <section id="Bankovanie" class="section">
         <h2>Bankovanie</h2>
         <div class="photo-container">
-        <img src="hyg1.jpg" alt="hyg 1">
-        <h2>Aké sú účinky bankovania?</h2>
-        <img src="hyg2.jpg" alt="hyg 2">
-        <h2>Pre koho je bankovanie vhodné?</h2>
-        <img src="hyg3.jpg" alt="hyg 3">
-        <h2>Kedy sa bankovanie neodporúča?</h2>
-        <img src="hyg4.jpg" alt="hyg 4">
-        <h2>Ako vyzerá procedúra?</h2>
-        <img src="hyg5.jpg" alt="hyg 5">
-        <h2>Prečo vyskúšať bankovanie?</h2>
-        <img src="hyg6.jpg" alt="hyg 6">
+            <img src="hyg1.jpg" alt="hyg 1">
+            <h2>Aké sú účinky bankovania?</h2>
+            <img src="hyg2.jpg" alt="hyg 2">
+            <h2>Pre koho je bankovanie vhodné?</h2>
+            <img src="hyg3.jpg" alt="hyg 3">
+            <h2>Kedy sa bankovanie neodporúča?</h2>
+            <img src="hyg4.jpg" alt="hyg 4">
+            <h2>Ako vyzerá procedúra?</h2>
+            <img src="hyg5.jpg" alt="hyg 5">
+            <h2>Prečo vyskúšať bankovanie?</h2>
+            <img src="hyg6.jpg" alt="hyg 6">
         </div>
-        <p></p>
     </section>
 
     <section id="services" class="section">
         <h2>Služby a ceny</h2>
-        
         <div class="photo-container">
             <img src="ceny.jpg" alt="ceny">
-            
-            
         </div>
     </section>
 
-    
-
-     <section id="Contact" class="Contact">
+    <section id="Contact" class="section Contact">
         <h2>Kontakty</h2>
-        <div class="section Contact">
-        <p>Adresa: Nešporova, 2550/35, Poprad-Veľká </p>
+        <p>Adresa: Nešporova, 2550/35, Poprad-Veľká</p>
         <p>Telefón: +421902899421</p>
-        <p>Email: vladirov@gmail.com.</p>
+        <p>Email: vladirov@gmail.com</p>
         <p><strong>Profesionálne služby s pohodlným výjazdom priamo k vám.</strong></p>
-       </div>
-   </section>
-      
-       
-
-  
-
-    
+        
+        <!-- Mapa -->
+        <div id="map"></div>
+    </section>
 </main>
 
 <footer>
-    &copy; 2026 Energia Vákuovej Masáže"
-                 Nešporova 2550/35
+    &copy; 2026 Energia Vákuovej Masáže, Nešporova 2550/35
 </footer>
 
 <div class="visit-counter">
     <span id="visit-count"></span>
-
 </div>
 
-
-<div id="video-modal" style="display:none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 100;">
-    <video id="promo-video" width="100%" height="100%" controls autoplay>
-        <source src="video.mp4" type="video/mp4">
-        Váš prehliadač nepodporuje video tag.
-    </video>
-    <button onclick="closeVideo()" style="position: absolute; top: 10px; right: 10px; background: white; border: none; padding: 10px; cursor: pointer;">Zatvoriť</button>
+<!-- Modal okno pre prehrávanie videa -->
+<div id="video-modal" onclick="closeVideo()">
+    <div class="video-container" onclick="event.stopPropagation()">
+        <button class="close-btn" onclick="closeVideo()">Zatvoriť ✕</button>
+        <video id="promo-video" width="100%" controls>
+            <source src="video.mp4" type="video/mp4">
+            Váš prehliadač nepodporuje video tag.
+        </video>
+    </div>
 </div>
 
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script>
+    // Prekrývanie prehliadača obrázkov pri skrolovaní
     document.addEventListener('scroll', function() {
         var slideshow = document.querySelector('.slideshow');
         if (window.scrollY > 500) {
@@ -331,10 +298,19 @@ h1{font-size:24px}h2{font-size:20px}
         }
     });
 
-    // Відображення та закриття відео
+    // Otvorenie a zatvorenie modal okna s videom
     function showVideo() {
-        document.getElementById('video-modal').style.display = 'block';
-        document.getElementById('promo-video').play();
+        var videoModal = document.getElementById('video-modal');
+        var promoVideo = document.getElementById('promo-video');
+        videoModal.style.display = 'flex';
+        
+        // Spustenie videa s ošetrením blokovania automatického prehrávania
+        var playPromise = promoVideo.play();
+        if (playPromise !== undefined) {
+            playPromise.catch(function(error) {
+                console.log("Automatické prehrávanie bolo zablokované prehliadačom.");
+            });
+        }
     }
 
     function closeVideo() {
@@ -345,53 +321,34 @@ h1{font-size:24px}h2{font-size:20px}
         promoVideo.currentTime = 0;
     }
 
-    // Лічильник відвідувань
+    // Zatvorenie cez klávesu ESC
+    document.addEventListener('keydown', function(e) {
+        if (e.key === "Escape") {
+            closeVideo();
+        }
+    });
+
+    // Počítadlo návštev
     document.addEventListener('DOMContentLoaded', function() {
         var visitCount = localStorage.getItem('visitCount') || 0;
         visitCount++;
         localStorage.setItem('visitCount', visitCount);
         document.getElementById('visit-count').innerText = visitCount;
-     });
 
-   // Функція для обнулення лічильника
+        // Inicializácia Mapy Leaflet
+        var mapElement = document.getElementById('map');
+        if (mapElement) {
+            var map = L.map('map').setView([49.0675351, 20.2936956], 15);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; OpenStreetMap contributors'
+            }).addTo(map);
 
-    function resetVisitCount() {
-    localStorage.setItem('visitCount', 0); 
-   // Обнулити в localStorage
-    document.getElementById('visit-count').innerText = 0; 
-   // Оновити текст на сторінці
-    alert('Лічильник обнулений!');
-}
+            L.marker([49.0675351, 20.2936956]).addTo(map)
+                .bindPopup('Energia Vákuovej Masáže<p>Nešporova 2550/35, Poprad</p>')
+                .openPopup();
+        }
+    });
+</script>
 
-    // Ініціалізація карти OpenStreetMap
-    var map = L.map('map').setView([49.0675351, 20.2936956], 15); // Замініть на координати вашого салону
-
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(map);
-
-    L.marker([49.0675351, 20.2936956]).addTo(map) // Замініть на координати вашого салону
-        .bindPopup('Energia Vákuovej Masáže"<p>Nešporova 2550/35,Poprad</p>')
-        .openPopup();
-
-    // Додаємо рецензію
-    document.querySelector('#reviews form').addEventListener('submit', function(event) {
-        event.preventDefault(); // Запобігає перезавантаженню сторінки
-        const reviewText = this.querySelector('textarea').value;
-
-        if (reviewText.trim() !== '') {
-            const reviewItem = document.createElement('div');
-            reviewItem.classList.add('review-item'); // Клас для стилів, якщо потрібно
-
-            // Створюємо текст рецензії
-            const reviewContent = document.createElement('p');
-            reviewContent.textContent = reviewText;
-
-            // Створюємо кнопку для видалення
-            const deleteButton = document.createElement('button');
-            deleteButton.textContent = 'odstraniť';
-            deleteButton.classList.add('delete-button'); // Клас для стилів, якщо потрібно
-
-            // Додаємо обробник подій для кнопки "Odstraniť"
-            deleteButton.addEventListener('click', function() {
-                reviewItem.remove(); // Видаля
+</body>
+</html>
