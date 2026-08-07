@@ -337,7 +337,6 @@
 
     <section id="Contact" class="section Contact">
         <h2>Kontakty</h2>
-        <p>Adresa: Nešporova, 2550/35, Poprad-Veľká</p>
         <p>Telefón: +421902899421</p>
         <p>Email: vladirov@gmail.com</p>
         <p><strong>Profesionálne služby s pohodlným výjazdom priamo k vám.</strong></p>
@@ -402,24 +401,7 @@
         }
     });
 
-    document.addEventListener('DOMContentLoaded', function() {
-        var visitCount = localStorage.getItem('visitCount') || 0;
-        visitCount++;
-        localStorage.setItem('visitCount', visitCount);
-        document.getElementById('visit-count').innerText = visitCount;
-
-        var mapElement = document.getElementById('map');
-        if (mapElement) {
-            var map = L.map('map').setView([49.0675351, 20.2936956], 15);
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; OpenStreetMap contributors'
-            }).addTo(map);
-
-            L.marker([49.0675351, 20.2936956]).addTo(map)
-                .bindPopup('Energia Vákuovej Masáže<p>Nešporova 2550/35, Poprad</p>')
-                .openPopup();
-        }
-    });
+    
 </script>
 
 </body>
