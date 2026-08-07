@@ -190,7 +190,23 @@
 }
 
 
-    </style>
+    
+
+/* === Responsive additions === */
+@media (max-width:768px){
+.logo,.contact-info{position:relative;left:0;right:0;top:0;text-align:center}
+.logo img{width:70px}
+nav{flex-direction:column;padding:10px}
+nav a{display:block;width:100%;padding:12px;margin:2px 0}
+main{margin-top:40vh;padding:15px}
+.slideshow{height:45vh}.slideshow img{width:100%;height:100%}
+.photo-container{display:block}
+.photo-container img{width:100%!important;max-width:100%!important;left:0!important}
+#map{height:300px}
+h1{font-size:24px}h2{font-size:20px}
+}
+
+</style>
 </head>
 <body>
 
@@ -271,6 +287,7 @@
      <section id="Contact" class="Contact">
         <h2>Kontakty</h2>
         <div class="section Contact">
+        <p>Adresa: Nešporova, 2550/35, Poprad-Veľká </p>
         <p>Telefón: +421902899421</p>
         <p>Email: vladirov@gmail.com.</p>
         <p><strong>Profesionálne služby s pohodlným výjazdom priamo k vám.</strong></p>
@@ -286,7 +303,7 @@
 
 <footer>
     &copy; 2026 Energia Vákuovej Masáže"
-                 
+                 Nešporova 2550/35
 </footer>
 
 <div class="visit-counter">
@@ -377,25 +394,4 @@
 
             // Додаємо обробник подій для кнопки "Odstraniť"
             deleteButton.addEventListener('click', function() {
-                reviewItem.remove(); // Видаляє поточну рецензію
-            });
-
-            // Додаємо текст та кнопку в елемент рецензії
-            reviewItem.appendChild(reviewContent);
-            reviewItem.appendChild(deleteButton);
-
-            // Додаємо рецензію в список
-            document.querySelector('#reviews-list').appendChild(reviewItem);
-
-            // Очищуємо поле вводу
-            this.querySelector('textarea').value = '';
-        } else {
-            alert('Напишіть щось у рецензії перед відправкою!');
-        }
-    });
-</script>
-
-
-
-</body>
-</html>
+                reviewItem.remove(); // Видаля
