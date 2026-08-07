@@ -79,6 +79,7 @@
             overflow: hidden;
             display: flex;
             justify-content: center;
+            flex-wrap: wrap;
             padding: 20px;
             position: relative;
             z-index: 1;
@@ -193,6 +194,51 @@
             font-weight: bold;
             border-radius: 3px;
         }
+
+        /* ========================================== */
+        /*   ÚPRAVA PRE MOBILNÉ ZARIADENIA (RESPONSIVE) */
+        /* ========================================== */
+        @media (max-width: 768px) {
+            header {
+                padding-top: 100px;
+            }
+            .logo {
+                top: 10px;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            .contact-info {
+                position: static;
+                text-align: center;
+                margin-top: 15px;
+            }
+            nav {
+                flex-direction: column;
+                padding: 10px 0;
+            }
+            nav a {
+                padding: 8px 10px;
+                margin: 5px 0;
+            }
+            main {
+                margin-top: 40vh;
+                padding: 5px;
+            }
+            .photo-container img {
+                width: 100%;
+                left: 0; /* Zrušíme posun doľava pre mobily */
+            }
+            #map {
+                height: 300px;
+            }
+            .video-container {
+                width: 95%;
+            }
+            .close-btn {
+                top: -35px;
+                padding: 5px 10px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -262,7 +308,6 @@
         <p>Email: vladirov@gmail.com</p>
         <p><strong>Profesionálne služby s pohodlným výjazdom priamo k vám.</strong></p>
         
-        <!-- Mapa -->
         <div id="map"></div>
     </section>
 </main>
@@ -275,7 +320,6 @@
     <span id="visit-count"></span>
 </div>
 
-<!-- Modal okno pre prehrávanie videa -->
 <div id="video-modal" onclick="closeVideo()">
     <div class="video-container" onclick="event.stopPropagation()">
         <button class="close-btn" onclick="closeVideo()">Zatvoriť ✕</button>
@@ -288,7 +332,6 @@
 
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script>
-    // Prekrývanie prehliadača obrázkov pri skrolovaní
     document.addEventListener('scroll', function() {
         var slideshow = document.querySelector('.slideshow');
         if (window.scrollY > 500) {
@@ -298,13 +341,11 @@
         }
     });
 
-    // Otvorenie a zatvorenie modal okna s videom
     function showVideo() {
         var videoModal = document.getElementById('video-modal');
         var promoVideo = document.getElementById('promo-video');
         videoModal.style.display = 'flex';
         
-        // Spustenie videa s ošetrením blokovania automatického prehrávania
         var playPromise = promoVideo.play();
         if (playPromise !== undefined) {
             playPromise.catch(function(error) {
@@ -321,21 +362,18 @@
         promoVideo.currentTime = 0;
     }
 
-    // Zatvorenie cez klávesu ESC
     document.addEventListener('keydown', function(e) {
         if (e.key === "Escape") {
             closeVideo();
         }
     });
 
-    // Počítadlo návštev
     document.addEventListener('DOMContentLoaded', function() {
         var visitCount = localStorage.getItem('visitCount') || 0;
         visitCount++;
         localStorage.setItem('visitCount', visitCount);
         document.getElementById('visit-count').innerText = visitCount;
 
-        // Inicializácia Mapy Leaflet
         var mapElement = document.getElementById('map');
         if (mapElement) {
             var map = L.map('map').setView([49.0675351, 20.2936956], 15);
