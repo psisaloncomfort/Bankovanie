@@ -25,14 +25,14 @@
         }
         .slideshow img {
             position: absolute;
-            top: 50%;
+            top: 0;
             left: 50%;
-            width: 90%;
+            width: 100%;
+            max-width: 1200px;
             height: 100%;
             object-fit: cover;
-            transform: translate(-50%, -50%);
+            transform: translateX(-50%);
             opacity: 1;
-            animation: slideShow 30s infinite;
         }
         
         header {
@@ -181,26 +181,35 @@
             width: 80%;
             max-width: 900px;
             background: #000;
+            padding-top: 35px; /* Priestor pre tlačidlo zatvorenia */
         }
         .close-btn {
             position: absolute;
-            top: -40px;
-            right: 0;
-            background: #fff;
+            top: 5px;
+            right: 5px;
+            background: rgba(255, 255, 255, 0.9);
             color: #000;
             border: none;
-            padding: 8px 16px;
+            padding: 6px 14px;
             cursor: pointer;
             font-weight: bold;
             border-radius: 3px;
+            z-index: 1001;
+        }
+        .close-btn:hover {
+            background: #75fb81;
         }
 
-        /* ========================================== */
-        /*   ÚPRAVA PRE MOBILNÉ ZARIADENIA (RESPONSIVE) */
-        /* ========================================== */
+        /* Responsive pre Mobily */
         @media (max-width: 768px) {
+            .slideshow {
+                height: 50vh; /* Zmenšená výška pre mobily */
+            }
+            .slideshow img {
+                object-fit: contain; /* Celá fotka bude viditeľná */
+            }
             header {
-                padding-top: 100px;
+                padding-top: 90px;
             }
             .logo {
                 top: 10px;
@@ -221,22 +230,25 @@
                 margin: 5px 0;
             }
             main {
-                margin-top: 40vh;
+                margin-top: 25vh;
                 padding: 5px;
             }
             .photo-container img {
                 width: 100%;
-                left: 0; /* Zrušíme posun doľava pre mobily */
+                left: 0;
             }
             #map {
                 height: 300px;
             }
             .video-container {
                 width: 95%;
+                padding-top: 40px;
             }
             .close-btn {
-                top: -35px;
-                padding: 5px 10px;
+                top: 5px;
+                right: 5px;
+                padding: 6px 12px;
+                font-size: 14px;
             }
         }
     </style>
